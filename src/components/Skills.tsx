@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { CheckCircle, Cpu } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
@@ -21,11 +20,11 @@ const Skills = () => {
     { name: 'Tailwind CSS', percentage: 85 },
   ];
 
-  // Tools proficiency
+  // Tools proficiency - removed InVision, Git, Zeplin, and Principle, added CorelDraw and Capcut
   const tools = [
     'Figma', 'Adobe XD', 'Photoshop', 'Illustrator', 
-    'Sketch', 'InVision', 'Webflow', 'VS Code',
-    'Git', 'Zeplin', 'Principle', 'After Effects'
+    'Sketch', 'Webflow', 'VS Code', 'CorelDraw',
+    'After Effects', 'Capcut'
   ];
 
   // Animation states for progressbars

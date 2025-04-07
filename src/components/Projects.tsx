@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import ProjectCard from './ProjectCard';
 import { motion } from 'framer-motion';
+import { ArrowRightIcon } from 'lucide-react';
 
 const Projects = () => {
   // Categories for filtering

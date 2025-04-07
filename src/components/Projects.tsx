@@ -13,7 +13,7 @@ const Projects = () => {
       id: 1,
       title: 'Eco-Friendly Website Redesign',
       category: 'Web Design',
-      description: 'A complete overhaul of an eco-conscious brand's online presence with responsive design and improved user experience.',
+      description: "A complete overhaul of an eco-conscious brand's online presence with responsive design and improved user experience.",
       imageUrl: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80',
     },
     {

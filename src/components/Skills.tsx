@@ -54,7 +54,7 @@ const Skills = () => {
   });
 
   return (
-    <section id="skills" className="section-padding bg-white" id="skills-section">
+    <section id="skills-section" className="section-padding bg-white">
       <div className="container-custom">
         <div className="text-center mb-16">
           <p className="text-teal-500 font-medium mb-2">My Skills</p>

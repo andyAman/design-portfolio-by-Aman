@@ -14,7 +14,7 @@ const Footer = () => {
       <div className="container-custom py-12">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
-            <a href="#" className="text-2xl font-bold">Portfolio<span className="text-teal-500">.</span></a>
+            <a href="#" className="text-2xl font-bold">Aman<span className="text-teal-500">.</span></a>
             <p className="mt-2 text-white/70 max-w-md">
               Creating beautiful digital experiences through design and development.
             </p>
@@ -40,7 +40,7 @@ const Footer = () => {
         
         <div className="border-t border-white/10 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/60 text-sm">
-            © {new Date().getFullYear()} Designer Portfolio. All rights reserved.
+            © {new Date().getFullYear()} Aman. All rights reserved.
           </p>
           
           <div className="mt-4 md:mt-0 flex gap-4">

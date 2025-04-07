@@ -9,8 +9,8 @@ const Hero = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div className="space-y-6 animate-fadeIn" style={{ animationDelay: '0.3s' }}>
             <p className="text-teal-500 font-medium">Hello, I'm</p>
-            <h1 className="heading-xl text-navy-800">Creative <br />
-              <span className="text-gradient">Designer</span>
+            <h1 className="heading-xl text-navy-800">Aman <br />
+              <span className="text-gradient">Creative Designer</span>
             </h1>
             <p className="text-lg text-gray-600 max-w-lg">
               I design and develop experiences that make people's lives simple through Web and Mobile apps. I work with Figma, HTML5, CSS3, JavaScript, React, Tailwind and more.

@@ -21,6 +21,7 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['Inter', 'sans-serif'],
+				display: ['Space Grotesk', 'sans-serif'],
 				serif: ['Georgia', 'serif'],
 			},
 			colors: {
@@ -108,6 +109,19 @@ export default {
 				slideInRight: {
 					'0%': { transform: 'translateX(100%)' },
 					'100%': { transform: 'translateX(0)' }
+				},
+				float: {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				glow: {
+					'0%, 100%': { boxShadow: '0 0 5px rgba(13, 148, 136, 0.5)' },
+					'50%': { boxShadow: '0 0 20px rgba(13, 148, 136, 0.8)' }
+				},
+				rotate3d: {
+					'0%': { transform: 'perspective(1000px) rotateX(0) rotateY(0)' },
+					'50%': { transform: 'perspective(1000px) rotateX(5deg) rotateY(5deg)' },
+					'100%': { transform: 'perspective(1000px) rotateX(0) rotateY(0)' }
 				}
 			},
 			animation: {
@@ -115,7 +129,18 @@ export default {
 				"accordion-up": "accordion-up 0.2s ease-out",
 				"fadeIn": "fadeIn 0.6s ease-out forwards",
 				"fadeOut": "fadeOut 0.6s ease-out forwards",
-				"slideInRight": "slideInRight 0.5s ease-out"
+				"slideInRight": "slideInRight 0.5s ease-out",
+				"float": "float 6s ease-in-out infinite",
+				"glow": "glow 3s ease-in-out infinite",
+				"rotate3d": "rotate3d 10s ease-in-out infinite"
+			},
+			backgroundImage: {
+				'grid-pattern': "linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px)",
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+			},
+			backgroundSize: {
+				'grid': '20px 20px'
 			}
 		}
 	},

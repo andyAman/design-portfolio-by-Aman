@@ -1,5 +1,5 @@
 
-import { lazy, Suspense } from 'react';
+import React, { lazy, Suspense } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 
@@ -16,6 +16,44 @@ const PageLoader = () => (
     <div className="w-8 h-8 border-4 border-teal-500 border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
+
+// Define types for ErrorBoundary
+interface ErrorBoundaryProps {
+  children: React.ReactNode;
+}
+
+interface ErrorBoundaryState {
+  hasError: boolean;
+}
+
+// Simple error boundary component
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
+    console.error("Component Error:", error, errorInfo);
+  }
+
+  render(): React.ReactNode {
+    if (this.state.hasError) {
+      return (
+        <div className="p-6 bg-red-50 rounded-lg">
+          <h3 className="text-lg font-medium text-red-800">Something went wrong</h3>
+          <p className="text-sm text-red-600">Please refresh the page</p>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
 
 const Index = () => {
   return (
@@ -56,34 +94,5 @@ const Index = () => {
     </div>
   );
 };
-
-// Simple error boundary component
-class ErrorBoundary extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError(error) {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    console.error("Component Error:", error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return (
-        <div className="p-6 bg-red-50 rounded-lg">
-          <h3 className="text-lg font-medium text-red-800">Something went wrong</h3>
-          <p className="text-sm text-red-600">Please refresh the page</p>
-        </div>
-      );
-    }
-
-    return this.props.children;
-  }
-}
 
 export default Index;

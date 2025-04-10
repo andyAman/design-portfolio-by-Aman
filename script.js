@@ -8,6 +8,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const menuToggle = document.querySelector('.menu-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileLinks = document.querySelectorAll('.nav-mobile .nav-link');
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  
+  // Check for saved dark mode preference
+  if (localStorage.getItem('darkMode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+    if (darkModeToggle) darkModeToggle.checked = true;
+  }
+
+  // Dark mode toggle functionality
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener('change', () => {
+      if (darkModeToggle.checked) {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('darkMode', 'disabled');
+      }
+    });
+  }
 
   // Scroll reveal elements
   const allRevealElements = document.querySelectorAll('.reveal-element');
@@ -58,6 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const progress = progressBars[index]?.getAttribute('data-progress') || 0;
         glow.style.width = `${progress}%`;
       });
+    }
+
+    // Show/hide scroll to top button
+    if (window.scrollY > 500) {
+      scrollToTopBtn.classList.add('show');
+    } else {
+      scrollToTopBtn.classList.remove('show');
     }
   }
   
@@ -177,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function hideToast() {
     toast.classList.remove('show');
   }
-  
+
   // Initialize
   handleScroll(); // Call once on load
   window.addEventListener('scroll', handleScroll);
@@ -188,6 +215,13 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         el.classList.add('visible');
       }, 300);
+    }
+  });
+
+  // Add lazy loading to all images to improve loading speed
+  document.querySelectorAll('img').forEach(img => {
+    if (!img.hasAttribute('loading')) {
+      img.setAttribute('loading', 'lazy');
     }
   });
 });

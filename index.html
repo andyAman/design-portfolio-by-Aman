@@ -721,50 +721,5 @@
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script src="script.js"></script>
-    
-    <!-- Additional optimization script -->
-    <script>
-      // Image loading optimization
-      document.addEventListener('DOMContentLoaded', function() {
-        // Mark images as loaded when they finish loading
-        const images = document.querySelectorAll('img[loading="lazy"]');
-        images.forEach(img => {
-          if (img.complete) {
-            img.classList.add('loaded');
-          } else {
-            img.addEventListener('load', function() {
-              this.classList.add('loaded');
-            });
-          }
-        });
-        
-        // Fix skills button link in mobile nav
-        const mobileSkillsLink = document.querySelector('.nav-mobile .nav-link[href="#skills-section"]');
-        if (mobileSkillsLink) {
-          mobileSkillsLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.getElementById('mobile-menu').classList.remove('open');
-            document.querySelector('.menu-toggle').classList.remove('menu-open');
-            document.body.classList.remove('no-scroll');
-            
-            const skillsSection = document.getElementById('skills-section');
-            if (skillsSection) {
-              setTimeout(() => {
-                skillsSection.scrollIntoView({ behavior: 'smooth' });
-              }, 300);
-            }
-          });
-        }
-        
-        // Sync desktop/mobile dark mode toggles
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const darkModeToggleMobile = document.getElementById('darkModeToggleMobile');
-        
-        if (darkModeToggle && darkModeToggleMobile) {
-          // Initialize mobile toggle based on desktop state
-          darkModeToggleMobile.checked = darkModeToggle.checked;
-        }
-      });
-    </script>
   </body>
 </html>

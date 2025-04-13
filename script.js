@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
   // Set current year in the footer
   document.getElementById('currentYear').textContent = new Date().getFullYear();
@@ -9,25 +8,52 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileLinks = document.querySelectorAll('.nav-mobile .nav-link');
   const darkModeToggle = document.getElementById('darkModeToggle');
+  const darkModeToggleMobile = document.getElementById('darkModeToggleMobile');
   
-  // Check for saved dark mode preference
+  // Check for saved dark mode preference and apply it
+  const applyDarkMode = (enabled) => {
+    if (enabled) {
+      document.body.classList.add('dark-mode');
+      if (darkModeToggle) darkModeToggle.checked = true;
+      if (darkModeToggleMobile) darkModeToggleMobile.checked = true;
+    } else {
+      document.body.classList.remove('dark-mode');
+      if (darkModeToggle) darkModeToggle.checked = false;
+      if (darkModeToggleMobile) darkModeToggleMobile.checked = false;
+    }
+  };
+  
+  // Check local storage on page load
   if (localStorage.getItem('darkMode') === 'enabled') {
-    document.body.classList.add('dark-mode');
-    if (darkModeToggle) darkModeToggle.checked = true;
+    applyDarkMode(true);
   }
 
   // Dark mode toggle functionality
+  const toggleDarkMode = (event) => {
+    const enabled = event.target.checked;
+    localStorage.setItem('darkMode', enabled ? 'enabled' : 'disabled');
+    applyDarkMode(enabled);
+  };
+
   if (darkModeToggle) {
-    darkModeToggle.addEventListener('change', () => {
-      if (darkModeToggle.checked) {
-        document.body.classList.add('dark-mode');
-        localStorage.setItem('darkMode', 'enabled');
-      } else {
-        document.body.classList.remove('dark-mode');
-        localStorage.setItem('darkMode', 'disabled');
-      }
-    });
+    darkModeToggle.addEventListener('change', toggleDarkMode);
   }
+  
+  if (darkModeToggleMobile) {
+    darkModeToggleMobile.addEventListener('change', toggleDarkMode);
+  }
+
+  // Synchronize toggles - if one changes, update the other
+  function syncToggles(sourceToggle, targetToggle) {
+    if (sourceToggle && targetToggle) {
+      sourceToggle.addEventListener('change', () => {
+        targetToggle.checked = sourceToggle.checked;
+      });
+    }
+  }
+
+  syncToggles(darkModeToggle, darkModeToggleMobile);
+  syncToggles(darkModeToggleMobile, darkModeToggle);
 
   // Scroll reveal elements
   const allRevealElements = document.querySelectorAll('.reveal-element');
@@ -89,20 +115,24 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // Mobile menu toggle
-  menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('menu-open');
-    mobileMenu.classList.toggle('open');
-    document.body.classList.toggle('no-scroll');
-  });
+  if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('menu-open');
+      mobileMenu.classList.toggle('open');
+      document.body.classList.toggle('no-scroll');
+    });
+  }
   
   // Close mobile menu when clicking a link
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      menuToggle.classList.remove('menu-open');
-      mobileMenu.classList.remove('open');
-      document.body.classList.remove('no-scroll');
+  if (mobileLinks) {
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('menu-open');
+        mobileMenu.classList.remove('open');
+        document.body.classList.remove('no-scroll');
+      });
     });
-  });
+  }
   
   // Project filtering
   filterBtns.forEach(btn => {

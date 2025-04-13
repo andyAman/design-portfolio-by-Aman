@@ -42,9 +42,21 @@ const Navbar = () => {
     if (darkMode) {
       document.body.classList.add('dark-mode');
       localStorage.setItem('darkMode', 'enabled');
+      
+      // Also update the mobile toggle if it exists
+      const mobileToggle = document.getElementById('darkModeToggleMobile');
+      if (mobileToggle && mobileToggle instanceof HTMLInputElement) {
+        mobileToggle.checked = true;
+      }
     } else {
       document.body.classList.remove('dark-mode');
       localStorage.setItem('darkMode', 'disabled');
+      
+      // Also update the mobile toggle if it exists
+      const mobileToggle = document.getElementById('darkModeToggleMobile');
+      if (mobileToggle && mobileToggle instanceof HTMLInputElement) {
+        mobileToggle.checked = false;
+      }
     }
   }, [darkMode]);
 

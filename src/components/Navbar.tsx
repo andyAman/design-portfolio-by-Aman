@@ -1,11 +1,18 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Moon, Sun } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Switch } from './ui/switch';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    // Check for saved dark mode preference
+    return localStorage.getItem('darkMode') === 'enabled';
+  });
+  const isMobile = useIsMobile();
 
   // Navigation items
   const navItems = [
@@ -30,6 +37,21 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Handle dark mode toggle
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('darkMode', 'enabled');
+    } else {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('darkMode', 'disabled');
+    }
+  }, [darkMode]);
+
+  const handleDarkModeToggle = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
     <header 
       className={cn(
@@ -49,15 +71,33 @@ const Navbar = () => {
               {item.label}
             </a>
           ))}
+          <div className="flex items-center space-x-2">
+            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <Switch checked={darkMode} onCheckedChange={handleDarkModeToggle} />
+            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          </div>
         </nav>
 
         {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden text-navy-800"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="md:hidden flex items-center space-x-4">
+          <div className="flex items-center space-x-1 mr-2">
+            {darkMode ? 
+              <Moon className="h-[1.2rem] w-[1.2rem] text-navy-800" /> : 
+              <Sun className="h-[1.2rem] w-[1.2rem] text-navy-800" />
+            }
+            <Switch 
+              checked={darkMode} 
+              onCheckedChange={handleDarkModeToggle}
+              size="sm"
+            />
+          </div>
+          <button 
+            className="text-navy-800"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}

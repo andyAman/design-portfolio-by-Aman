@@ -88,7 +88,7 @@ const Navbar = () => {
             <Switch 
               checked={darkMode} 
               onCheckedChange={handleDarkModeToggle}
-              size="sm"
+              className="scale-75" // Using className for styling instead of size prop
             />
           </div>
           <button 

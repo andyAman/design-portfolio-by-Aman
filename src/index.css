@@ -38,6 +38,36 @@
     --radius: 0.5rem;
   }
 
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 217 32% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 32% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 173 89% 32%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 32% 17%;
+    --input: 217 32% 17%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+
   * {
     @apply border-border;
     scroll-behavior: smooth;
@@ -50,7 +80,14 @@
   body {
     @apply bg-background text-foreground antialiased overflow-x-hidden;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  body.light {
     background: linear-gradient(to bottom, rgba(240, 249, 255, 1) 0%, rgba(229, 240, 248, 1) 100%);
+  }
+
+  body.dark {
+    background: linear-gradient(to bottom, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 1) 100%);
   }
 }
 
@@ -92,11 +129,11 @@
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-navy-800 via-navy-600 to-teal-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-navy-800 via-navy-600 to-teal-500 bg-clip-text text-transparent dark:from-teal-400 dark:via-teal-300 dark:to-white;
   }
 
   .glass-card {
-    @apply backdrop-blur-md bg-white/30 border border-white/50 shadow-lg;
+    @apply backdrop-blur-md bg-white/30 border border-white/50 shadow-lg dark:bg-navy-800/30 dark:border-navy-700/50;
   }
   
   .futuristic-border {
@@ -161,4 +198,11 @@
     linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
   background-size: 20px 20px;
+}
+
+/* Dark mode specific styles */
+.dark .grid-pattern {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
